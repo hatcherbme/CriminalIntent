@@ -1,0 +1,46 @@
+package com.bignerdranch.android.criminalintent;
+
+
+import java.util.Date;
+import java.util.UUID;
+import android.text.format.DateFormat;
+
+public class Crime {
+	
+	private UUID mId;
+	private String mTitle;
+	private DateFormat mDate;
+	private boolean mSolved;
+	
+	public Crime() {
+	// Generate unique identifier
+	mId = UUID.randomUUID();
+	mDate = new DateFormat();
+	}
+	@Override
+	public String toString() {
+	return mTitle;
+	}
+	public DateFormat getDate() {
+		return mDate;
+	}
+	public void setDateFormat(DateFormat date) {
+		mDate = date;
+	}
+	public boolean isSolved() {
+		return mSolved;
+	}
+	public void setSolved(boolean solved) {
+		mSolved = solved;
+	}
+	public UUID getId() {
+		return mId;
+	}
+	public String getTitle() {
+		return mTitle;
+	}
+	public void setTitle(String title) {
+		mTitle = title;
+	}
+
+}
