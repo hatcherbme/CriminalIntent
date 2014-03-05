@@ -9,22 +9,22 @@ public class Crime {
 	
 	private UUID mId;
 	private String mTitle;
-	private DateFormat mDate;
+	private Date mDate;
 	private boolean mSolved;
 	
 	public Crime() {
 	// Generate unique identifier
 	mId = UUID.randomUUID();
-	mDate = new DateFormat();
+	mDate = new Date();
 	}
 	@Override
 	public String toString() {
 	return mTitle;
 	}
-	public DateFormat getDate() {
+	public Date getDate() {
 		return mDate;
 	}
-	public void setDateFormat(DateFormat date) {
+	public void setDate(Date date) {
 		mDate = date;
 	}
 	public boolean isSolved() {
