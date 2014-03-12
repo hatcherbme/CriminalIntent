@@ -6,6 +6,8 @@ import java.util.UUID;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,12 +24,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class CrimeFragment extends Fragment {
     public static final String EXTRA_CRIME_ID = "criminalintent.CRIME_ID";
     private static final String DIALOG_DATE = "date";
     private static final int REQUEST_DATE = 0;
-
+    private ImageButton mPhotoButton;
     Crime mCrime;
     EditText mTitleField;
     Button mDateButton;
@@ -107,7 +110,27 @@ public class CrimeFragment extends Fragment {
                 // set the crime's solved property
                 mCrime.setSolved(isChecked);
             }
-        });       
+        });  
+        
+        mPhotoButton = (ImageButton)v.findViewById(R.id.crime_imageButton);
+        mPhotoButton.setOnClickListener(new View.OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+        		Intent i = new Intent(getActivity(), CrimeCameraActivity.class);
+        		startActivity(i);
+        	}
+        });
+        
+        // If camera is not available, disable camera functionality
+        PackageManager pm = getActivity().getPackageManager();
+        boolean  hasACamera = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
+        		pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT) ||
+        		(Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD && 
+        		Camera.getNumberOfCameras() > 0);
+        if (!hasACamera) {
+        		mPhotoButton.setEnabled(false);
+        }
+        
         
         return v; 
     }
