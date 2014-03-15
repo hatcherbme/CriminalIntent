@@ -13,10 +13,14 @@ import android.support.v4.view.ViewPager;
 
 
 
-public class CrimePagerActivity extends FragmentActivity {
+public class CrimePagerActivity extends FragmentActivity 
+	implements CrimeFragment.Callbacks {
 
 	private ViewPager mViewPager;
 	private ArrayList<Crime> mCrimes;
+	
+	public void onCrimeUpdated(Crime crime) {
+	}
 	
 	
 	@Override
